@@ -1,0 +1,19 @@
+{
+  "name": "cryptotao_test_code",
+  "version": "1.0.0",
+  "description": "An application code for CryptoTao made by iborba",
+  "main": "app.js",
+  "scripts": {
+    "start:dev": "nodemon",
+    "prepare": "husky install"
+  },
+  "author": "https://github.com/iborba",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^17.0.25",
+    "husky": "^7.0.4",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
+  }
+}
