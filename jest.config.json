@@ -1,8 +1,21 @@
 {
-  "preset": "ts-jest",
+  "roots": ["<rootDir>/__tests__"],
+  "collectCoverageFrom": [
+    "<rootDir>/src/**/*.ts",
+    "!<rootDir>/src/main/**"
+  ],
+  "coverageDirectory": "coverage",
+  "preset": "@shelf/jest-mongodb",
+  "transform": {
+    ".+\\.ts$": "ts-jest"
+  },
   "testEnvironment": "node",
   "bail": 1,
   "verbose": true,
-  "testTimeout": 5000000
+  "testTimeout": 5000000,
+  "moduleNameMapper": {
+    "@/__tests__/(.*)": "<rootDir>/__tests__/$1",
+    "@/(.*)": "<rootDir>/src/$1"
+  }
 }
 

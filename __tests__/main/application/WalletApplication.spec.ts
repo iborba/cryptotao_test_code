@@ -1,4 +1,4 @@
-import { WalletApplication } from '../WalletApplication';
+import { WalletApplication } from '../../../src/main/application/WalletApplication';
 
 describe('WalletApplication', () => {
   const address = '4FAExmztfa3SDKoquvEjB5puUsbSasZ5m2Asksegfr9K';
