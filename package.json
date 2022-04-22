@@ -8,8 +8,8 @@
     "start": "npm run build && node build/index.js",
     "start:dev": "nodemon",
     "prepare": "husky install",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "jest --detectOpenHandles",
+    "test:watch": "jest --watch --detectOpenHandles --maxWorkers=1"
   },
   "husky": {
     "hooks": {

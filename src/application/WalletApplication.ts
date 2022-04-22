@@ -1,9 +1,14 @@
 import { resolveToWalletAddress, getParsedNftAccountsByOwner } from '@nfteyez/sol-rayz';
 export class WalletApplication {
   async connectToWallet(addres: string) {
-    const publicAddress = await resolveToWalletAddress({ text: addres });
-    const nftArray = await getParsedNftAccountsByOwner({ publicAddress });
+    try {
+      return await resolveToWalletAddress({ text: addres });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-    return nftArray;
+  async getNFTsFromWallet(publicAddress: string) {
+    return await getParsedNftAccountsByOwner({ publicAddress });
   }
 }

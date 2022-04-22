@@ -1,23 +1,29 @@
 import { WalletApplication } from '../WalletApplication';
 
-describe('how to create a gallery of NFTS held in a particular wallet', () => {
+describe('WalletApplication', () => {
   const address = '4FAExmztfa3SDKoquvEjB5puUsbSasZ5m2Asksegfr9K';
+  const wallet = new WalletApplication();
+  let publicAddress: string;
+
+  beforeAll(async () => {
+    const result = await wallet.connectToWallet(address);
+    if (result) {
+      publicAddress = result;
+    }
+  });
 
   it('should connect to a wallet', async () => {
-    const wallet = new WalletApplication();
-    const result = await wallet.connectToWallet(address);
+    expect(publicAddress).not.toBeNull();
+  });
 
-    expect(result).not.toBeNull();
+  it('should get all elements in a wallet', async () => {
+    const result = await wallet.getNFTsFromWallet(publicAddress);
     expect(result[0]).toHaveProperty('key');
   });
 
-  it('should create a personal gallery', () => { });
-
-  it('should copy all elements in the wallet to the gallery', () => { });
-
-  it('should delete one or more elements from the gallery', () => { });
-
-  it('should not duplicate elements inside the gallery and return a warning to the user, saying NFT XXX already in the gallery', () => { });
-
-  it("should return an error if the wallet doesn't exist, saying 'Address Wallet not found'", () => { });
+  it("should return an error if the wallet doesn't exist, saying 'Can't resolve provided name into valid Solana address =('", async () => {
+    const address = await wallet.connectToWallet('invalid_address_format');
+    console.log('sasasa');
+    // expect(address).toThrowError("Can't resolve provided name into valid Solana address =(");
+  });
 });
