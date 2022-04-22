@@ -23,6 +23,6 @@ describe('WalletApplication', () => {
 
   it("should return an error if the wallet doesn't exist, saying 'Can't resolve provided name into valid Solana address =('", async () => {
     const address = await wallet.connectToWallet('invalid_address_format');
-    expect(address).toBeUndefined();
+    expect(address).toEqual("Can't resolve provided name into valid Solana address =(");
   });
 });

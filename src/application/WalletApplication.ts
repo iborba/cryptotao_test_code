@@ -4,7 +4,11 @@ export class WalletApplication {
     try {
       return await resolveToWalletAddress({ text: addres });
     } catch (error) {
-      console.log(error);
+      if (error instanceof Error) {
+        return error.message;
+      }
+
+      return '';
     }
   }
 
