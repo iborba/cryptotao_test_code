@@ -18,6 +18,8 @@ describe('WalletApplication', () => {
 
   it('should get all elements in a wallet', async () => {
     const result = await wallet.getNFTsFromWallet(publicAddress);
+    expect(result).toBeTruthy();
+    expect(Array.isArray(result)).toBe(true);
     expect(result[0]).toHaveProperty('key');
   });
 
@@ -26,10 +28,11 @@ describe('WalletApplication', () => {
     expect(address).toEqual("Can't resolve provided name into valid Solana address =(");
   });
 
-  it('should get an error if publicaddres invalid for getting NFTs from wallet', async () => {
-    const publicaddres = 'invalid public address';
-    const result = await wallet.getNFTsFromWallet(publicAddress);
-
-    console.log(result);
+  it('should get an empty array if publicaddres is invalid for getting NFTs from wallet', async () => {
+    const invalidPublicAddress = 'invalid public address';
+    const result = await wallet.getNFTsFromWallet(invalidPublicAddress);
+    expect(result).toBeTruthy();
+    expect(Array.isArray(result)).toBe(true);
+    expect(result).toHaveLength(0);
   });
 });
