@@ -25,4 +25,11 @@ describe('WalletApplication', () => {
     const address = await wallet.connectToWallet('invalid_address_format');
     expect(address).toEqual("Can't resolve provided name into valid Solana address =(");
   });
+
+  it('should get an error if publicaddres invalid for getting NFTs from wallet', async () => {
+    const publicaddres = 'invalid public address';
+    const result = await wallet.getNFTsFromWallet(publicAddress);
+
+    console.log(result);
+  });
 });
