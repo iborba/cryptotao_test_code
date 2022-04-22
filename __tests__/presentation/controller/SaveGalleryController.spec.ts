@@ -14,46 +14,49 @@ type AuxTypes = {
   saveGallerySpy: SaveGallerySpy
 }
 
-const makeAux = (): AuxTypes => {
+const makeGalleryAux = (): AuxTypes => {
   const saveGallerySpy = new SaveGallerySpy()
   const aux = new SaveGalleryController(saveGallerySpy)
   return {
-    aux, saveGallerySpy
+    aux: aux,
+    saveGallerySpy,
   }
 }
 
 describe('SaveGalleryController', () => {
-  it('Should create a new gallery', async () => {
-    const { aux } = makeAux()
-    const httpResponse = await aux.handle(mockRequest())
+  describe('How to handle with gallery creation', () => {
+    it('Should create a new gallery', async () => {
+      const { aux } = makeGalleryAux()
+      const httpResponse = await aux.handle(mockRequest())
 
-    expect(httpResponse).toEqual(noContent())
-  });
+      expect(httpResponse).toEqual(noContent())
+    });
 
-  it('Should not create a gallery if name not informed', async () => {
-    const { aux } = makeAux()
-    const data = mockRequest()
-    data.name = ''
-    const httpResponse = await aux.handle(data)
+    it('Should not create a gallery if name not informed', async () => {
+      const { aux } = makeGalleryAux()
+      const data = mockRequest()
+      data.name = ''
+      const httpResponse = await aux.handle(data)
 
-    expect(httpResponse).toEqual(badRequest(new Error('Gallery name not informed')))
-  })
+      expect(httpResponse).toEqual(badRequest(new Error('Gallery name not informed')))
+    })
 
-  it('Should not create a gallery if ownerId not informed', async () => {
-    const { aux } = makeAux()
-    const data = mockRequest()
-    data.ownerId = ''
-    const httpResponse = await aux.handle(data)
+    it('Should not create a gallery if ownerId not informed', async () => {
+      const { aux } = makeGalleryAux()
+      const data = mockRequest()
+      data.ownerId = ''
+      const httpResponse = await aux.handle(data)
 
-    expect(httpResponse).toEqual(badRequest(new Error('Owner not informed')))
-  })
+      expect(httpResponse).toEqual(badRequest(new Error('Owner not informed')))
+    })
 
-  it('Should not create a gallery if nftId not informed', async () => {
-    const { aux } = makeAux()
-    const data = mockRequest()
-    data.nftId = ''
-    const httpResponse = await aux.handle(data)
+    it('Should not create a gallery if nftId not informed', async () => {
+      const { aux } = makeGalleryAux()
+      const data = mockRequest()
+      data.nftId = ''
+      const httpResponse = await aux.handle(data)
 
-    expect(httpResponse).toEqual(badRequest(new Error('NFT not informed')))
+      expect(httpResponse).toEqual(badRequest(new Error('NFT not informed')))
+    })
   })
 })
