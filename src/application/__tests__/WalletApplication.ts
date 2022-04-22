@@ -5,25 +5,29 @@ describe('WalletApplication', () => {
   const wallet = new WalletApplication();
   let publicAddress: string;
 
-  beforeAll(async () => {
+  beforeAll(async (done) => {
     const result = await wallet.connectToWallet(address);
     if (result) {
       publicAddress = result;
     }
+    done();
   });
 
-  it('should connect to a wallet', async () => {
+  test('should connect to a wallet', async (done) => {
     expect(publicAddress).not.toBeNull();
+    done();
   });
 
-  it('should get all elements in a wallet', async () => {
+  test('should get all elements in a wallet', async (done) => {
     const result = await wallet.getNFTsFromWallet(publicAddress);
     expect(result[0]).toHaveProperty('key');
+    done();
   });
 
-  it("should return an error if the wallet doesn't exist, saying 'Can't resolve provided name into valid Solana address =('", async () => {
+  test("should return an error if the wallet doesn't exist, saying 'Can't resolve provided name into valid Solana address =('", async (done) => {
     const address = await wallet.connectToWallet('invalid_address_format');
     console.log('sasasa');
     // expect(address).toThrowError("Can't resolve provided name into valid Solana address =(");
+    done();
   });
 });
