@@ -10,7 +10,7 @@
     "prepare": "husky install",
     "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down",
-    "test": "jest --clearCache && jest",
+    "test": "jest --clearCache && jest -c jest-unit-config.js",
     "test:watch": "jest --clearCache && jest --watch --detectOpenHandles --maxWorkers=1 -c jest-unit-config.js"
   },
   "husky": {
