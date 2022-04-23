@@ -1,7 +1,6 @@
 import { badRequest, ok } from "../../helpers/HttpHelper";
 import { HttpResponse } from "../../protocols";
-import { BaseListGalleryController } from "./BaseListGalleryController";
-import { IListGalleryController } from "./IListGalleryController";
+import { BaseListGalleryController, IListGalleryController } from "./BaseListGalleryController";
 
 export class ListAllGalleriesController extends BaseListGalleryController implements IListGalleryController {
   async handle(request: any, type?: object | undefined): Promise<HttpResponse> {

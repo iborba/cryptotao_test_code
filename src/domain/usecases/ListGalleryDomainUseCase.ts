@@ -7,7 +7,6 @@ export interface ListGalleryDomainUseCase {
 }
 
 export namespace ListGalleryDomainUseCase {
-
   export type Params = {
     id: string,
     nftId: string
@@ -21,5 +20,4 @@ export namespace ListGalleryDomainUseCase {
     galleryId: string,
     nft: object
   }
-
 }

@@ -1,7 +1,9 @@
 import { ListGalleryDomainUseCase } from "../../../domain/usecases";
 import { noContent } from "../../helpers/HttpHelper";
-import { HttpResponse } from "../../protocols";
-import { IListGalleryController } from "./IListGalleryController";
+import { Controller, HttpResponse } from "../../protocols";
+
+export interface IListGalleryController extends Controller {
+}
 
 export class BaseListGalleryController implements IListGalleryController {
   constructor(

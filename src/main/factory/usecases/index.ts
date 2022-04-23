@@ -1,2 +1,1 @@
-export * from './ListGallleryFactory'
-export * from './SaveGallleryFactory'
+export * from './GallleryUseCaseFactory'
