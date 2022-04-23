@@ -1,5 +1,5 @@
 import { CreateGallery } from "../../../src/domain/usecases/CreateGallery";
-import { ListGallery } from "../../../src/domain/usecases/ListGallery";
+import { ListGalleryUseCase } from "../../../src/domain/usecases/ListGallery";
 import { mockFindAllNFTs, mockFindGalleries, mockFindGallery, mockFindOneNFT } from "../../domain/mocks/MockGallery";
 
 export class SaveGallerySpy implements CreateGallery {
@@ -10,7 +10,7 @@ export class SaveGallerySpy implements CreateGallery {
   }
 }
 
-export class ListGallerySpy implements ListGallery {
+export class ListGallerySpy implements ListGalleryUseCase {
   params: ListGallery.Params | undefined
   async findAll(): Promise<ListGallery.GalleriesResult> {
     return mockFindGalleries()

@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { adaptRoute } from '../adapters/ExpressRouteAdapter';
+import { makeListGalleryController } from '../factory/controller/ListGalleryControllerFactory';
 import { makeSaveGalleryController } from '../factory/controller/SaveGalleryControllerFactory';
 import { headerValidator } from '../middleware/validators/headers';
 import { WalletService } from '../services/WalletService';
@@ -16,5 +17,10 @@ export class Routes {
     this.routes.get('/wallet', headerValidator, walletService.getWallet);
     this.routes.post('/wallet', headerValidator, walletService.createWallet);
     this.routes.post('/gallery', headerValidator, adaptRoute(makeSaveGalleryController()))
+
+    this.routes.get('/galleries', headerValidator, adaptRoute(makeListGalleryController('galleries')))
+    this.routes.get('/gallery', headerValidator, adaptRoute(makeListGalleryController('gallery')))
+    this.routes.get('/nfts', headerValidator, adaptRoute(makeListGalleryController('nfts')))
+    this.routes.get('/nft', headerValidator, adaptRoute(makeListGalleryController('nft')))
   }
 }

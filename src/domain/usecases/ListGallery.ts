@@ -1,12 +1,12 @@
 import { GalleryModel } from '../models/GalleryModel'
-export interface ListGallery {
-  findAll: () => Promise<ListGallery.GalleriesResult>
-  findOne: (id: string) => Promise<ListGallery.GalleryResult>
-  findOneNFT: (id: string, nftId: string) => Promise<ListGallery.NFTResult>
-  findAllNFTs: (id: string) => Promise<ListGallery.NFTResult[]>
+export interface ListGalleryUseCase {
+  findAll: () => Promise<ListGalleryUseCase.GalleriesResult>
+  findOne: (id: string) => Promise<ListGalleryUseCase.GalleryResult | undefined>
+  findOneNFT: (id: string, nftId: string) => Promise<ListGalleryUseCase.NFTResult | undefined>
+  findAllNFTs: (id: string) => Promise<ListGalleryUseCase.NFTResult[]>
 }
 
-export namespace ListGallery {
+export namespace ListGalleryUseCase {
 
   export type Params = {
     id: string,
