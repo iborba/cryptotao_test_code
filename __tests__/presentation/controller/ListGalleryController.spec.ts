@@ -10,22 +10,26 @@ const mockRequest = (): ListGalleryController.Request => ({
 })
 
 type AuxTypes = {
-  listAux: ListGalleryController
+  aux: ListGalleryController
   listGallerySpy: ListGallerySpy
 }
 
 const makeGalleryAux = (): AuxTypes => {
   const listGallerySpy = new ListGallerySpy()
-  const listAux = new ListGalleryController(listGallerySpy)
+  const aux = new ListGalleryController(listGallerySpy)
   return {
-    listAux,
+    aux,
     listGallerySpy
   }
 }
 
 describe('ListGalleryController', () => {
   describe('How to list a gallery and its contents', () => {
-    it('should list a gallery by id', async () => { })
+    it('should list a gallery by id', async () => {
+      const { aux } = makeGalleryAux()
+      const httpResponse = await aux.handle(mockRequest())
+      expect(httpResponse).toEqual(noContent())
+    })
     it('should list all galeries', async () => { })
     it('should list all NFTs in a gallery', async () => { })
     it('should list one NFT in a gallery', async () => { })

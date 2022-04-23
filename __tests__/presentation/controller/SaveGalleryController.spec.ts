@@ -18,7 +18,7 @@ const makeGalleryAux = (): AuxTypes => {
   const saveGallerySpy = new SaveGallerySpy()
   const aux = new SaveGalleryController(saveGallerySpy)
   return {
-    aux: aux,
+    aux,
     saveGallerySpy,
   }
 }
