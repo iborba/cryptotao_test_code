@@ -1,5 +1,5 @@
 import { badRequest, ok } from "../../helpers/HttpHelper";
-import { HttpResponse } from "../../protocols/Http";
+import { HttpResponse } from "../../protocols";
 import { BaseListGalleryController } from "./BaseListGalleryController";
 import { IListGalleryController } from "./IListGalleryController";
 

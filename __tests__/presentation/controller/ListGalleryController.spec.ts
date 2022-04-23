@@ -1,4 +1,4 @@
-import { BaseListGalleryController } from "../../../src/presentation/controller/ListGallery/BaseListGalleryController";
+import { BaseListGalleryController } from "../../../src/presentation/controller";
 import { faker } from "@faker-js/faker"
 import { noContent } from "../../../src/presentation/helpers/HttpHelper";
 import { ListGallerySpy } from "../mocks/MockGallery";

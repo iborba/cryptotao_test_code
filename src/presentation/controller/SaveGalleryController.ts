@@ -1,7 +1,6 @@
-import { SaveGalleryDomainUseCase } from "../../domain/usecases/SaveGalleryDomainUseCase";
+import { SaveGalleryDomainUseCase } from "../../domain/usecases";
 import { badRequest, noContent } from "../helpers/HttpHelper";
-import { Controller } from "../protocols/Controller";
-import { HttpResponse } from "../protocols/Http";
+import { Controller, HttpResponse } from "../protocols";
 
 export class SaveGalleryController implements Controller {
   constructor(

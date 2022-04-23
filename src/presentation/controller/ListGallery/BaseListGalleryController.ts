@@ -1,11 +1,11 @@
-import { ListGalleryUseCase } from "../../../domain/usecases/ListGalleryDomainUseCase";
+import { ListGalleryDomainUseCase } from "../../../domain/usecases";
 import { noContent } from "../../helpers/HttpHelper";
-import { HttpResponse } from "../../protocols/Http";
+import { HttpResponse } from "../../protocols";
 import { IListGalleryController } from "./IListGalleryController";
 
 export class BaseListGalleryController implements IListGalleryController {
   constructor(
-    protected readonly listGallery: ListGalleryUseCase
+    protected readonly listGallery: ListGalleryDomainUseCase
   ) { }
 
   async handle(request: BaseListGalleryController.Request): Promise<HttpResponse> {

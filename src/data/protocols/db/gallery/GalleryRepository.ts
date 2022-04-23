@@ -1,12 +1,10 @@
-import GalleryModel from "../../../../domain/models/GalleryModel"
-import { SaveGalleryDomainUseCase } from "../../../../domain/usecases/SaveGalleryDomainUseCase"
-import { ListGalleryUseCase } from "../../../../domain/usecases/ListGalleryDomainUseCase"
+import { SaveGalleryDomainUseCase, ListGalleryDomainUseCase } from "../../../../domain/usecases"
 
 export interface GalleryRepository {
-  findAllNFTs(id: string): Promise<ListGalleryUseCase.NFTResult[]>
-  findOneNFT(id: string, nftId: string): Promise<ListGalleryUseCase.NFTResult | undefined>
-  findOneGallery(id: string): Promise<GalleryModel | undefined>
-  findAllGalleries(): Promise<ListGalleryUseCase.GalleriesResult>
+  findAllNFTs(id: string): Promise<ListGalleryDomainUseCase.NFTResult[]>
+  findOneNFT(id: string, nftId: string): Promise<ListGalleryDomainUseCase.NFTResult | undefined>
+  findOneGallery(id: string): Promise<ListGalleryDomainUseCase.GalleryResult | undefined>
+  findAllGalleries(): Promise<ListGalleryDomainUseCase.GalleriesResult>
   create: (gallery: SaveGalleryRepository.Params) => Promise<SaveGalleryRepository.Result>
 }
 

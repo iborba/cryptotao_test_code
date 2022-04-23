@@ -1,17 +1,16 @@
 import { GalleryRepository } from "../../../data/protocols/db/gallery/GalleryRepository";
-import GalleryModel from "../../../domain/models/GalleryModel";
-import { SaveGalleryDomainUseCase } from "../../../domain/usecases/SaveGalleryDomainUseCase";
-import { ListGalleryUseCase } from "../../../domain/usecases/ListGalleryDomainUseCase";
+import { GalleryModel } from "../../../domain/models";
+import { SaveGalleryDomainUseCase, ListGalleryDomainUseCase } from "../../../domain/usecases";
 import { MongoHelper } from "./MongoHelper";
 
 export class MongoRepository implements GalleryRepository {
-  async findAllNFTs(id: string): Promise<ListGalleryUseCase.NFTResult[]> {
+  async findAllNFTs(id: string): Promise<ListGalleryDomainUseCase.NFTResult[]> {
     const collection = MongoHelper.getCollection('nft')
     const result = await collection.find().toArray()
     console.log(result)
     return []
   }
-  async findOneNFT(id: string, nftId: string): Promise<ListGalleryUseCase.NFTResult | undefined> {
+  async findOneNFT(id: string, nftId: string): Promise<ListGalleryDomainUseCase.NFTResult | undefined> {
     const collection = MongoHelper.getCollection('nft')
     const result = await collection.findOne({ id, nftId })
     console.log(result)
@@ -23,7 +22,7 @@ export class MongoRepository implements GalleryRepository {
     console.log(result)
     return undefined
   }
-  async findAllGalleries(): Promise<ListGalleryUseCase.GalleriesResult> {
+  async findAllGalleries(): Promise<ListGalleryDomainUseCase.GalleriesResult> {
     const collection = MongoHelper.getCollection('galleries')
     const result = await collection.find().toArray()
     console.log(result)

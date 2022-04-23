@@ -1,8 +1,7 @@
 import { Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { adaptRoute } from '../adapters/ExpressRouteAdapter';
-import { makeListGalleryController } from '../factory/controller/ListGalleryControllerFactory';
-import { makeSaveGalleryController } from '../factory/controller/SaveGalleryControllerFactory';
+import { makeListGalleryController, makeSaveGalleryController } from '../factory/controller';
 import { headerValidator } from '../middleware/validators/headers';
 import { WalletService } from '../services/WalletService';
 

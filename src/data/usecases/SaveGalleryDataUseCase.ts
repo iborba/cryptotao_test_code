@@ -1,4 +1,4 @@
-import { SaveGalleryDomainUseCase } from "../../domain/usecases/SaveGalleryDomainUseCase";
+import { SaveGalleryDomainUseCase } from "../../domain/usecases";
 import { GalleryRepository } from "../protocols/db/gallery/GalleryRepository";
 
 export class SaveGalleryDataUseCase implements SaveGalleryDomainUseCase {

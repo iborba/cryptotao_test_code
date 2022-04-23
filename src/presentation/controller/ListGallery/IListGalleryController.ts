@@ -1,4 +1,4 @@
-import { Controller } from "../../protocols/Controller";
+import { Controller } from "../../protocols";
 
 export interface IListGalleryController extends Controller {
 }

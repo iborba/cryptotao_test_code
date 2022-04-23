@@ -1,6 +1,5 @@
 import faker from '@faker-js/faker'
-import { GalleryModel } from '../../../src/domain/models/GalleryModel'
-import { GalleryNFTModel } from '../../../src/domain/models/GalleryNFTModel'
+import { GalleryModel, GalleryNFTModel } from '../../../src/domain/models'
 export const mockFindGallery = (): GalleryModel => {
   return {
     id: faker.datatype.uuid(),

@@ -1,21 +1,20 @@
-import GalleryModel from "../../domain/models/GalleryModel";
-import { ListGalleryUseCase } from "../../domain/usecases/ListGalleryDomainUseCase";
+import { ListGalleryDomainUseCase } from "../../domain/usecases";
 import { GalleryRepository } from "../protocols/db/gallery/GalleryRepository";
 
-export class ListGalleryDataUseCase implements ListGalleryUseCase {
+export class ListGalleryDataUseCase implements ListGalleryDomainUseCase {
   constructor(
     private readonly galleryRepository: GalleryRepository
   ) { }
-  findAll(): Promise<ListGalleryUseCase.GalleriesResult> {
+  findAll(): Promise<ListGalleryDomainUseCase.GalleriesResult> {
     return this.galleryRepository.findAllGalleries();
   }
-  findOne(id: string): Promise<GalleryModel | undefined> {
+  findOne(id: string): Promise<ListGalleryDomainUseCase.GalleryResult | undefined> {
     return this.galleryRepository.findOneGallery(id);
   }
-  findOneNFT(id: string, nftId: string): Promise<ListGalleryUseCase.NFTResult | undefined> {
+  findOneNFT(id: string, nftId: string): Promise<ListGalleryDomainUseCase.NFTResult | undefined> {
     return this.galleryRepository.findOneNFT(id, nftId);
   }
-  findAllNFTs(id: string): Promise<ListGalleryUseCase.NFTResult[]> {
+  findAllNFTs(id: string): Promise<ListGalleryDomainUseCase.NFTResult[]> {
     return this.galleryRepository.findAllNFTs(id);
   }
 }

@@ -1,5 +1,5 @@
 import { SaveGalleryDataUseCase } from "../../../data/usecases/SaveGalleryDataUseCase";
-import { SaveGalleryDomainUseCase } from "../../../domain/usecases/SaveGalleryDomainUseCase";
+import { SaveGalleryDomainUseCase } from "../../../domain/usecases";
 import { MongoRepository } from "../../../infra/db/mongodb/MongoRepository";
 
 export const makeDBSaveGallery = (): SaveGalleryDomainUseCase => {
