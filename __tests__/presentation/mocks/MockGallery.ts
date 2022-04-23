@@ -1,28 +1,28 @@
-import { CreateGallery } from "../../../src/domain/usecases/CreateGallery";
-import { ListGalleryUseCase } from "../../../src/domain/usecases/ListGallery";
+import { SaveGalleryDomainUseCase } from "../../../src/domain/usecases/SaveGalleryDomainUseCase";
+import { ListGalleryUseCase } from "../../../src/domain/usecases/ListGalleryDomainUseCase";
 import { mockFindAllNFTs, mockFindGalleries, mockFindGallery, mockFindOneNFT } from "../../domain/mocks/MockGallery";
 
-export class SaveGallerySpy implements CreateGallery {
-  params: CreateGallery.Params | undefined
-  async create(gallery: CreateGallery.Params): Promise<boolean> {
+export class SaveGallerySpy implements SaveGalleryDomainUseCase {
+  params: SaveGalleryDomainUseCase.Params | undefined
+  async create(gallery: SaveGalleryDomainUseCase.Params): Promise<boolean> {
     this.params = gallery
     return true
   }
 }
 
 export class ListGallerySpy implements ListGalleryUseCase {
-  params: ListGallery.Params | undefined
-  async findAll(): Promise<ListGallery.GalleriesResult> {
+  params: ListGalleryUseCase.Params | undefined
+  async findAll(): Promise<ListGalleryUseCase.GalleriesResult> {
     return mockFindGalleries()
   }
-  async findOne(id: string): Promise<ListGallery.GalleryResult> {
+  async findOne(id: string): Promise<ListGalleryUseCase.GalleryResult> {
     return mockFindGallery();
   }
 
-  async findOneNFT(id: string, nftId: string): Promise<ListGallery.NFTResult> {
+  async findOneNFT(id: string, nftId: string): Promise<ListGalleryUseCase.NFTResult> {
     return mockFindOneNFT();
   }
-  async findAllNFTs(id: string): Promise<ListGallery.NFTResult[]> {
+  async findAllNFTs(id: string): Promise<ListGalleryUseCase.NFTResult[]> {
     return mockFindAllNFTs()
   }
 }

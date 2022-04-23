@@ -1,22 +1,21 @@
-import { ListGalleryController } from "../../../src/presentation/controller/ListGalleryController";
+import { BaseListGalleryController } from "../../../src/presentation/controller/ListGallery/BaseListGalleryController";
 import { faker } from "@faker-js/faker"
-import { badRequest, noContent } from "../../../src/presentation/helpers/HttpHelper";
+import { noContent } from "../../../src/presentation/helpers/HttpHelper";
 import { ListGallerySpy } from "../mocks/MockGallery";
 
-const mockRequest = (): ListGalleryController.Request => ({
+const mockRequest = (): BaseListGalleryController.Request => ({
   id: faker.random.word(),
   nftId: faker.datatype.uuid(),
-  type: faker.random.word()
 })
 
 type AuxTypes = {
-  aux: ListGalleryController
+  aux: BaseListGalleryController
   listGallerySpy: ListGallerySpy
 }
 
 const makeGalleryAux = (): AuxTypes => {
   const listGallerySpy = new ListGallerySpy()
-  const aux = new ListGalleryController(listGallerySpy)
+  const aux = new BaseListGalleryController(listGallerySpy)
   return {
     aux,
     listGallerySpy

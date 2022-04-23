@@ -1,8 +1,8 @@
 import GalleryModel from "../../domain/models/GalleryModel";
-import { ListGalleryUseCase } from "../../domain/usecases/ListGallery";
+import { ListGalleryUseCase } from "../../domain/usecases/ListGalleryDomainUseCase";
 import { GalleryRepository } from "../protocols/db/gallery/GalleryRepository";
 
-export class ListGallery implements ListGalleryUseCase {
+export class ListGalleryDataUseCase implements ListGalleryUseCase {
   constructor(
     private readonly galleryRepository: GalleryRepository
   ) { }

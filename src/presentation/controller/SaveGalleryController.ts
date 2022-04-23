@@ -1,12 +1,11 @@
-import { SaveGallery } from "../../data/usecases/SaveGallery";
-import { CreateGallery } from "../../domain/usecases/CreateGallery";
+import { SaveGalleryDomainUseCase } from "../../domain/usecases/SaveGalleryDomainUseCase";
 import { badRequest, noContent } from "../helpers/HttpHelper";
 import { Controller } from "../protocols/Controller";
 import { HttpResponse } from "../protocols/Http";
 
 export class SaveGalleryController implements Controller {
   constructor(
-    private readonly createGallery: CreateGallery
+    private readonly createGallery: SaveGalleryDomainUseCase
   ) { }
   async handle(request: SaveGalleryController.Request): Promise<HttpResponse> {
     const { name, nftId, ownerId } = request
@@ -28,5 +27,5 @@ export class SaveGalleryController implements Controller {
 }
 
 export namespace SaveGalleryController {
-  export type Request = CreateGallery.Params
+  export type Request = SaveGalleryDomainUseCase.Params
 }

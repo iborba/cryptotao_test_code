@@ -1,4 +1,4 @@
-import { ListGalleryUseCase } from "../../../domain/usecases/ListGallery";
+import { ListGalleryUseCase } from "../../../domain/usecases/ListGalleryDomainUseCase";
 import { noContent } from "../../helpers/HttpHelper";
 import { HttpResponse } from "../../protocols/Http";
 import { IListGalleryController } from "./IListGalleryController";

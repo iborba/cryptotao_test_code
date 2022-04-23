@@ -1,6 +1,6 @@
 import GalleryModel from "../../../../domain/models/GalleryModel"
-import { CreateGallery } from "../../../../domain/usecases/CreateGallery"
-import { ListGalleryUseCase } from "../../../../domain/usecases/ListGallery"
+import { SaveGalleryDomainUseCase } from "../../../../domain/usecases/SaveGalleryDomainUseCase"
+import { ListGalleryUseCase } from "../../../../domain/usecases/ListGalleryDomainUseCase"
 
 export interface GalleryRepository {
   findAllNFTs(id: string): Promise<ListGalleryUseCase.NFTResult[]>

@@ -1,7 +1,7 @@
 import { GalleryRepository } from "../../../data/protocols/db/gallery/GalleryRepository";
 import GalleryModel from "../../../domain/models/GalleryModel";
-import { CreateGallery } from "../../../domain/usecases/CreateGallery";
-import { ListGalleryUseCase } from "../../../domain/usecases/ListGallery";
+import { SaveGalleryDomainUseCase } from "../../../domain/usecases/SaveGalleryDomainUseCase";
+import { ListGalleryUseCase } from "../../../domain/usecases/ListGalleryDomainUseCase";
 import { MongoHelper } from "./MongoHelper";
 
 export class MongoRepository implements GalleryRepository {

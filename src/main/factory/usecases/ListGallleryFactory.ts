@@ -1,8 +1,8 @@
-import { ListGallery } from "../../../data/usecases/ListGallery";
-import { ListGalleryUseCase } from "../../../domain/usecases/ListGallery";
+import { ListGalleryDataUseCase } from "../../../data/usecases/ListGalleryDataUseCase";
+import { ListGalleryUseCase } from "../../../domain/usecases/ListGalleryDomainUseCase";
 import { MongoRepository } from "../../../infra/db/mongodb/MongoRepository";
 
 export const makeDBListGallery = (): ListGalleryUseCase => {
   const galleryMongoRepository = new MongoRepository()
-  return new ListGallery(galleryMongoRepository)
+  return new ListGalleryDataUseCase(galleryMongoRepository)
 }
