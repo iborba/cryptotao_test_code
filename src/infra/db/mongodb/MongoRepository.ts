@@ -30,7 +30,7 @@ export class MongoRepository implements GalleryRepository {
     return []
   }
 
-  async create(gallery: CreateGallery.Params): Promise<boolean> {
+  async create(gallery: SaveGalleryDomainUseCase.Params): Promise<boolean> {
     const galleryCollection = MongoHelper.getCollection('galleries')
     const result = await galleryCollection.insertOne(gallery)
 

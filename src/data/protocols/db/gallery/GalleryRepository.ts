@@ -11,7 +11,7 @@ export interface GalleryRepository {
 }
 
 export namespace SaveGalleryRepository {
-  export type Params = CreateGallery.Params
+  export type Params = SaveGalleryDomainUseCase.Params
 
-  export type Result = CreateGallery.Result
+  export type Result = SaveGalleryDomainUseCase.Result
 }
