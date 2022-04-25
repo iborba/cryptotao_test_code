@@ -8,19 +8,14 @@ services:
       - ./data:/data/db
     ports:
       - "27017:27017"
-#  api:
-#    container_name: api-container
-#    image: node:14
-#    working_dir: /usr/src/cryptotao-test-code
-#    restart: always
-#    command: bash -c "npm install --only=prod && npm run debug"
-#    environment:
-#      - MONGO_URL=mongodb://mongo:27017/cryptotao-test-code
-#    volumes:
-#      - ./dist/:/usr/src/cryptotao-test-code/dist/
-#      - ./package.json:/usr/src/cryptotao-test-code/package.json
-#    ports:
-#      - "5050:5050"
-#      - "9222:9222"
-#    links:
-#      - mongo
+  api:
+    container_name: cryptotao-test-code
+    image: node:14
+    restart: always
+    environment:
+      - PORT=3000
+      - MONGO_URL=mongodb://mongo:27017/cryptotao-test-code
+    ports:
+      - "3000:3000"
+    links:
+      - mongo

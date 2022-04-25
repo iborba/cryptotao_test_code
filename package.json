@@ -4,8 +4,8 @@
   "description": "An application code for CryptoTao made by iborba",
   "main": "app.js",
   "scripts": {
-    "build": "tsc",
-    "start": "npm run build && node build/index.js",
+    "build": "tsc -p",
+    "start": "npm run build && node build/server.js",
     "start:dev": "nodemon",
     "prepare": "husky install",
     "docker:up": "docker-compose up -d",
