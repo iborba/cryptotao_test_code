@@ -1,7 +1,7 @@
 import { ListAllNFTsController } from '../../../src/presentation/controller';
-import { faker } from '@faker-js/faker';
 import { BadNFTSpy, NFTSpy } from '../mocks';
 import { NFTDomainUseCase } from '../../../src/domain/usecases';
+import { ObjectId } from 'mongodb';
 
 type AuxTypes = {
   aux: ListAllNFTsController;
@@ -18,8 +18,8 @@ const makeBadNFTAux = (): AuxTypes => {
   return { aux, spy };
 };
 const params: NFTDomainUseCase.Params = {
-  id: faker.datatype.uuid(),
-  galleryId: faker.datatype.uuid(),
+  _id: new ObjectId(),
+  galleryId: new ObjectId(),
   nft: {},
 };
 

@@ -1,4 +1,5 @@
 import faker from '@faker-js/faker';
+import { ObjectId } from 'mongodb';
 import { NFTModel } from '../../../src/domain/models';
 import { NFTDomainUseCase } from '../../../src/domain/usecases';
 
@@ -36,18 +37,18 @@ const nft = {
   },
 };
 
-export const mockFindOneNFT = (galleryId: string, nftId: string): NFTModel => {
+export const mockFindOneNFT = (galleryId?: ObjectId, nftId?: ObjectId): NFTModel => {
   return {
     _id: nftId,
     galleryId,
     nft,
   };
 };
-export const mockFindAllNFTs = (galleryId: string): NFTModel[] => [
-  mockFindOneNFT(galleryId, faker.datatype.uuid()),
-  mockFindOneNFT(galleryId, faker.datatype.uuid()),
+export const mockFindAllNFTs = (galleryId: ObjectId): NFTModel[] => [
+  mockFindOneNFT(galleryId, new ObjectId()),
+  mockFindOneNFT(galleryId, new ObjectId()),
 ];
 export const mockAddNFT = (): NFTDomainUseCase.AddParams => ({
-  galleryId: faker.datatype.uuid(),
+  galleryId: new ObjectId(),
   nft,
 });

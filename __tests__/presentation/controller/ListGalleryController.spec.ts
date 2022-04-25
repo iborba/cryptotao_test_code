@@ -1,4 +1,5 @@
 import faker from '@faker-js/faker';
+import { ObjectId } from 'mongodb';
 import { GalleryDomainUseCase } from '../../../src/domain/usecases';
 import { ListGalleryController } from '../../../src/presentation/controller';
 import { BadGallerySpy, GallerySpy } from '../mocks';
@@ -18,10 +19,9 @@ const makeBadGalleryAux = (): AuxTypes => {
   return { aux, spy };
 };
 const params: GalleryDomainUseCase.Params = {
-  id: faker.datatype.uuid(),
+  _id: new ObjectId(),
   name: faker.random.word(),
-  nftId: faker.datatype.uuid(),
-  ownerId: faker.datatype.uuid(),
+  ownerId: new ObjectId(),
 };
 
 describe('ListGalleryController', () => {
@@ -30,8 +30,8 @@ describe('ListGalleryController', () => {
     const httpResponse = await aux.handle(params);
 
     expect(httpResponse.statusCode).toBe(200);
-    expect(httpResponse.body).toHaveProperty('id');
-    expect(httpResponse.body.id).toEqual(params.id);
+    expect(httpResponse.body).toHaveProperty('_id');
+    expect(httpResponse.body._id).toEqual(params._id);
   });
   it('should return error', async () => {
     const { aux } = makeBadGalleryAux();

@@ -1,9 +1,10 @@
+import { ObjectId } from 'mongodb';
 import { NFTDomainUseCase } from '../../../../domain/usecases';
 
 export interface NFTRepository {
-  findAll(galleryId: string): Promise<NFTDomainUseCase.Result[]>;
-  findOne(galleryId: string, nftId: string): Promise<NFTDomainUseCase.Result | null>;
+  findAll(galleryId?: ObjectId): Promise<NFTDomainUseCase.Result[]>;
+  findOne(galleryId?: ObjectId, nftId?: ObjectId): Promise<NFTDomainUseCase.Result | null>;
   create(nft: NFTDomainUseCase.Params): Promise<NFTDomainUseCase.Result | false>;
-  delete(galleryId: string, nftId: string): Promise<void>;
-  update(galleryId: string, nftId: string, nft: NFTDomainUseCase.Params): Promise<void>;
+  delete(galleryId?: ObjectId, nftId?: ObjectId): Promise<void>;
+  update(galleryId?: ObjectId, nftId?: ObjectId, nft: NFTDomainUseCase.Params): Promise<void>;
 }

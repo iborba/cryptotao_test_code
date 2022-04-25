@@ -3,11 +3,11 @@ import { GalleryRepository } from '../../../data/protocols/db/gallery/GalleryRep
 import { GalleryDomainUseCase } from '../../../domain/usecases';
 import { MongoHelper } from './MongoHelper';
 export class MongoGalleryRepository implements GalleryRepository {
-  async findOne(id: string): Promise<GalleryDomainUseCase.Result | null> {
+  async findOne(id?: ObjectId): Promise<GalleryDomainUseCase.Result | null> {
     const collection = MongoHelper.getCollection('galleries');
-    const data = await collection.findOne<GalleryDomainUseCase.Result>({ _id: new ObjectId(id) });
+    const data = await collection.findOne<GalleryDomainUseCase.Result>({ _id: id });
     if (data) {
-      data.id = id;
+      data._id = id;
     }
     return data;
   }
@@ -21,19 +21,19 @@ export class MongoGalleryRepository implements GalleryRepository {
     const result = await galleryCollection.insertOne(gallery);
 
     if (result.insertedId) {
-      gallery.id = result.insertedId.toHexString();
+      gallery._id = result.insertedId;
       return {
         ...gallery,
       };
     }
     return false;
   }
-  async delete(id: string): Promise<void> {
+  async delete(id?: ObjectId): Promise<void> {
     const collection = MongoHelper.getCollection('galleries');
-    await collection.deleteOne({ _id: new ObjectId(id) });
+    await collection.deleteOne({ _id: id });
   }
-  async update(id: string, gallery: GalleryDomainUseCase.Params): Promise<void> {
+  async update(id: ObjectId, gallery: GalleryDomainUseCase.Params): Promise<void> {
     const collection = MongoHelper.getCollection('galleries');
-    await collection.updateOne({ _id: new ObjectId(id) }, gallery);
+    await collection.updateOne({ _id: id }, gallery);
   }
 }

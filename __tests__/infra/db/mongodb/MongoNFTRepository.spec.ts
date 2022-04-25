@@ -1,26 +1,25 @@
-import { Collection } from 'mongodb';
+import { Collection, ObjectId } from 'mongodb';
 import { MongoHelper, MongoNFTRepository } from '../../../../src/infra/db/mongodb';
 import { mockAddNFT } from '../../../domain/mocks';
 import env from '../../../../src/main/config/env';
 import { NFTModel } from '../../../../src/domain/models';
-import faker from '@faker-js/faker';
 
 let nftCollection: Collection;
-let galleryId: string;
-let nftId: string;
+let galleryId: ObjectId | undefined;
+let nftId: ObjectId | undefined;
 
-const mockNFT = async (pGalleryId?: string): Promise<void> => {
+const mockNFT = async (pGalleryId?: ObjectId): Promise<void> => {
   const nft = mockAddNFT();
   if (pGalleryId) {
     nft.galleryId = pGalleryId;
   }
   const res = await nftCollection.insertOne(nft);
-  nftId = res.insertedId.toHexString();
+  nftId = res.insertedId;
   const result = await nftCollection.findOne<NFTModel>({ _id: res.insertedId });
   if (result) galleryId = result.galleryId;
 };
 
-const mockNFTs = async (galleryId: string): Promise<void> => {
+const mockNFTs = async (galleryId: ObjectId): Promise<void> => {
   await mockNFT(galleryId);
   await mockNFT(galleryId);
 };
@@ -54,7 +53,7 @@ describe('MongoNFTRepository', () => {
   });
 
   it('should find all NFTs', async () => {
-    await mockNFTs(faker.datatype.uuid());
+    await mockNFTs(new ObjectId());
 
     const aux = makeAux();
     const result = await aux.findAll(galleryId);

@@ -1,8 +1,9 @@
+import { ObjectId } from 'mongodb';
+
 export type GalleryModel = {
-  id: string;
+  _id?: ObjectId;
   name: string;
-  nftId: string;
-  ownerId: string;
+  ownerId?: ObjectId;
 };
 
 export default GalleryModel;

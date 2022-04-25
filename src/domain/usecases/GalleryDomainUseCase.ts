@@ -1,22 +1,21 @@
+import { ObjectId } from 'mongodb';
 import { GalleryModel } from '../models';
 export interface GalleryDomainUseCase {
   findAll: () => Promise<GalleryDomainUseCase.Result[]>;
-  findOne: (id: string) => Promise<GalleryDomainUseCase.Result | null>;
+  findOne: (id?: ObjectId) => Promise<GalleryDomainUseCase.Result | null>;
   create: (gallery: GalleryDomainUseCase.Params) => Promise<GalleryDomainUseCase.Result | false>;
 }
 
 export namespace GalleryDomainUseCase {
   export type Params = {
-    id: string;
+    _id: ObjectId | undefined;
     name: string;
-    nftId: string;
-    ownerId: string;
+    ownerId: ObjectId | undefined;
   };
 
   export type AddParams = {
     name: string;
-    nftId: string;
-    ownerId: string;
+    ownerId: ObjectId | undefined;
   };
   export type Result = GalleryModel;
 }

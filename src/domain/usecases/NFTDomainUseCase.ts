@@ -1,19 +1,20 @@
+import { ObjectId } from 'mongodb';
 import { NFTModel } from '../models';
 
 export interface NFTDomainUseCase {
-  findOne: (galleryId: string, nftId: string) => Promise<NFTDomainUseCase.Result | null>;
-  findAll: (galleryId: string) => Promise<NFTDomainUseCase.Result[]>;
+  findOne: (galleryId: ObjectId, nftId?: ObjectId) => Promise<NFTDomainUseCase.Result | null>;
+  findAll: (galleryId: ObjectId) => Promise<NFTDomainUseCase.Result[]>;
   create: (nft: NFTDomainUseCase.Params) => Promise<NFTDomainUseCase.Result | false>;
 }
 
 export namespace NFTDomainUseCase {
   export type Params = {
-    id: string;
-    galleryId: string;
+    _id?: ObjectId;
+    galleryId?: ObjectId;
     nft: object;
   };
   export type AddParams = {
-    galleryId: string;
+    galleryId?: ObjectId;
     nft: object;
   };
   export type Result = NFTModel;

@@ -4,15 +4,15 @@ import { NFTDomainUseCase } from '../../../domain/usecases';
 import { MongoHelper } from './MongoHelper';
 
 export class MongoNFTRepository implements NFTRepository {
-  async findOne(id: string, nftId: string): Promise<NFTDomainUseCase.Result | null> {
+  async findOne(id?: ObjectId, nftId?: ObjectId): Promise<NFTDomainUseCase.Result | null> {
     const collection = MongoHelper.getCollection('nft');
-    const data = await collection.findOne<NFTDomainUseCase.Result>({ _id: new ObjectId(nftId), galleryId: id });
+    const data = await collection.findOne<NFTDomainUseCase.Result>({ _id: nftId, galleryId: id });
     if (data) {
       data._id = nftId;
     }
     return data;
   }
-  async findAll(galleryId: string): Promise<NFTDomainUseCase.Result[]> {
+  async findAll(galleryId?: ObjectId): Promise<NFTDomainUseCase.Result[]> {
     const collection = MongoHelper.getCollection('nft');
     return await collection.find<NFTDomainUseCase.Result>({ galleryId }).toArray();
   }
@@ -23,18 +23,18 @@ export class MongoNFTRepository implements NFTRepository {
 
     if (result.insertedId) {
       return {
-        _id: result.insertedId.toHexString(),
+        _id: result.insertedId,
         ...nft,
       };
     }
     return false;
   }
-  async delete(galleryId: string, nftId: string): Promise<void> {
+  async delete(galleryId?: ObjectId, nftId?: ObjectId): Promise<void> {
     const collection = MongoHelper.getCollection('nft');
-    await collection.deleteOne({ _id: new ObjectId(nftId) });
+    await collection.deleteOne({ _id: nftId });
   }
-  async update(galleryId: string, nftId: string, nft: NFTDomainUseCase.Params): Promise<void> {
+  async update(galleryId: ObjectId, nftId: ObjectId, nft: NFTDomainUseCase.Params): Promise<void> {
     const collection = MongoHelper.getCollection('nft');
-    await collection.updateOne({ _id: new ObjectId(nftId), galleryId }, nft);
+    await collection.updateOne({ _id: nftId, galleryId }, nft);
   }
 }

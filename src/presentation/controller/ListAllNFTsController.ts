@@ -7,6 +7,11 @@ export class ListAllNFTsController implements Controller {
   async handle(request: NFTDomainUseCase.Params): Promise<HttpResponse> {
     try {
       const { galleryId } = request;
+
+      if (!galleryId) {
+        return badRequest(new Error('Gallery Id not found'));
+      }
+
       const result = await this.domain.findAll(galleryId);
       return ok(result);
     } catch (error) {

@@ -28,5 +28,6 @@ export class App {
   start() {
     this.middlewares();
     this.routes();
+    const server = 
   }
 }

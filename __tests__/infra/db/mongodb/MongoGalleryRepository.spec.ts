@@ -1,15 +1,15 @@
-import { Collection } from 'mongodb';
+import { Collection, ObjectId } from 'mongodb';
 import { MongoHelper, MongoGalleryRepository } from '../../../../src/infra/db/mongodb';
 import { mockAddGallery } from '../../../domain/mocks';
 import env from '../../../../src/main/config/env';
 
 let galleryCollection: Collection;
-let galleryId: string;
+let galleryId: ObjectId | undefined;
 
 const mockGallery = async (): Promise<void> => {
   const gallery = mockAddGallery();
   const res = await galleryCollection.insertOne(gallery);
-  galleryId = res.insertedId.toHexString();
+  galleryId = res.insertedId;
 };
 
 const mockGalleries = async (): Promise<void> => {
@@ -42,7 +42,7 @@ describe('MongoRepository', () => {
     const result = await aux.findOne(galleryId);
 
     expect(result).not.toBeNull();
-    expect(result?.id).toEqual(galleryId);
+    expect(result?._id).toEqual(galleryId);
   });
 
   it('should find all galleries', async () => {

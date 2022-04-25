@@ -6,8 +6,13 @@ export class ListNFTController implements Controller {
   constructor(private readonly domain: NFTDomainUseCase) { }
   async handle(request: NFTDomainUseCase.Params): Promise<HttpResponse> {
     try {
-      const { galleryId, id } = request;
-      const result = await this.domain.findOne(galleryId, id);
+      const { galleryId, _id } = request;
+
+      if (!galleryId) {
+        return badRequest(new Error('Gallery Id not found'));
+      }
+
+      const result = await this.domain.findOne(galleryId, _id);
       return ok(result);
     } catch (error) {
       return badRequest(new Error('error listing NFT'));

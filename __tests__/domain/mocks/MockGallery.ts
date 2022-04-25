@@ -1,21 +1,20 @@
 import faker from '@faker-js/faker';
+import { ObjectId } from 'mongodb';
 import { GalleryModel } from '../../../src/domain/models';
 import { GalleryDomainUseCase } from '../../../src/domain/usecases';
-export const mockFindGallery = (id: string): GalleryModel => {
+export const mockFindGallery = (id?: ObjectId): GalleryModel => {
   return {
-    id: id,
+    _id: id,
     name: faker.random.word(),
-    nftId: faker.datatype.uuid(),
-    ownerId: faker.datatype.uuid(),
+    ownerId: new ObjectId(),
   };
 };
 export const mockFindGalleries = (): GalleryModel[] => [
-  mockFindGallery(faker.datatype.uuid()),
-  mockFindGallery(faker.datatype.uuid()),
+  mockFindGallery(new ObjectId()),
+  mockFindGallery(new ObjectId()),
 ];
 
 export const mockAddGallery = (): GalleryDomainUseCase.AddParams => ({
   name: faker.random.word(),
-  nftId: faker.datatype.uuid(),
-  ownerId: faker.datatype.uuid(),
+  ownerId: new ObjectId(),
 });
