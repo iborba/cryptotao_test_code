@@ -1,2 +1,2 @@
-export * from './GalleryModel'
-export * from './GalleryNFTModel'
+export * from './GalleryModel';
+export * from './GalleryNFTModel';

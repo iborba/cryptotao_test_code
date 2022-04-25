@@ -16,5 +16,5 @@
       "@/tests/*": ["../__tests__/*"]
     }
   },
-  "include": ["src", "tests"],
+  "include": ["src", "__tests__"],
 }

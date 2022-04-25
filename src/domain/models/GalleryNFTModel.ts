@@ -1,5 +1,5 @@
 export type GalleryNFTModel = {
-  id: string
-  galleryId: string
-  nft: object
+  id: string;
+  galleryId: string;
+  nft: object;
 };

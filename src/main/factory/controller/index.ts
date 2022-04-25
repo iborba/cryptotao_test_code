@@ -1,1 +1,1 @@
-export * from './GalleryControllerFactory'
+export * from './ControllerFactory';

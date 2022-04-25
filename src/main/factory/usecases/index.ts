@@ -1,1 +1,1 @@
-export * from './GallleryUseCaseFactory'
+export * from './GallleryUseCaseFactory';

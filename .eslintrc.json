@@ -15,9 +15,9 @@
     "prettier/prettier": "error",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-explicit-any": "warn",
     "@typescript-eslint/no-unused-vars": "warn",
-    "@typescript-eslint/no-namespace": "off",
+    "@typescript-eslint/no-namespace": "off"
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {

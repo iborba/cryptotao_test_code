@@ -1,15 +1,14 @@
-import { SaveGalleryDomainUseCase, ListGalleryDomainUseCase } from "../../../../domain/usecases"
+import { GalleryDomainUseCase } from '../../../../domain/usecases';
 
 export interface GalleryRepository {
-  findAllNFTs(id: string): Promise<ListGalleryDomainUseCase.NFTResult[]>
-  findOneNFT(id: string, nftId: string): Promise<ListGalleryDomainUseCase.NFTResult | undefined>
-  findOneGallery(id: string): Promise<ListGalleryDomainUseCase.GalleryResult | undefined>
-  findAllGalleries(): Promise<ListGalleryDomainUseCase.GalleriesResult>
-  create: (gallery: SaveGalleryRepository.Params) => Promise<SaveGalleryRepository.Result>
+  findOne(id: string): Promise<GalleryDomainUseCase.Result | null>;
+  findAll(): Promise<GalleryDomainUseCase.Result[]>;
+  create(gallery: GalleryRepository.Params): Promise<GalleryRepository.Result | false>;
+  delete(id: string): Promise<void>;
+  update(id: string, gallery: GalleryRepository.Params): Promise<void>;
 }
 
-export namespace SaveGalleryRepository {
-  export type Params = SaveGalleryDomainUseCase.Params
-
-  export type Result = SaveGalleryDomainUseCase.Result
+export namespace GalleryRepository {
+  export type Params = GalleryDomainUseCase.Params;
+  export type Result = GalleryDomainUseCase.Result;
 }

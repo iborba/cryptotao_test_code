@@ -1,30 +1,27 @@
-import { SaveGalleryDomainUseCase } from "../../domain/usecases";
-import { badRequest, noContent } from "../helpers/HttpHelper";
-import { Controller, HttpResponse } from "../protocols";
+import { GalleryDomainUseCase } from '../../domain/usecases';
+import { badRequest, noContent } from '../helpers/HttpHelper';
+import { Controller, HttpResponse } from '../protocols';
 
 export class SaveGalleryController implements Controller {
-  constructor(
-    private readonly createGallery: SaveGalleryDomainUseCase
-  ) { }
+  constructor(private readonly createGallery: GalleryDomainUseCase) { }
   async handle(request: SaveGalleryController.Request): Promise<HttpResponse> {
-    const { name, nftId, ownerId } = request
+    const { name, nftId, ownerId } = request;
     if (!name) {
-      return badRequest(new Error('Gallery name not informed'))
+      return badRequest(new Error('Gallery name not informed'));
     }
     if (!nftId) {
-      return badRequest(new Error('NFT not informed'))
+      return badRequest(new Error('NFT not informed'));
     }
     if (!ownerId) {
-      return badRequest(new Error('Owner not informed'))
+      return badRequest(new Error('Owner not informed'));
     }
 
-    await this.createGallery.create(request)
+    await this.createGallery.create(request);
 
-    return noContent()
+    return noContent();
   }
-
 }
 
 export namespace SaveGalleryController {
-  export type Request = SaveGalleryDomainUseCase.Params
+  export type Request = GalleryDomainUseCase.Params;
 }

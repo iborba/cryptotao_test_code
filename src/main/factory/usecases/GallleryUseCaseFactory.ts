@@ -1,13 +1,15 @@
-import { ListGalleryDataUseCase } from "../../../data/usecases/ListGalleryDataUseCase";
-import { SaveGalleryDataUseCase } from "../../../data/usecases/SaveGalleryDataUseCase";
-import { ListGalleryDomainUseCase, SaveGalleryDomainUseCase } from "../../../domain/usecases";
-import { MongoRepository } from "../../../infra/db/mongodb/MongoRepository";
+import { GalleryDataUseCase } from '../../../data/usecases/GalleryDataUseCase';
+import { NFTDataUseCase } from '../../../data/usecases/NFTDataUseCase';
+import { GalleryDomainUseCase, NFTDomainUseCase } from '../../../domain/usecases';
+import { MongoNFTRepository } from '../../../infra/db/mongodb';
+import { MongoGalleryRepository } from '../../../infra/db/mongodb/MongoGalleryRepository';
 
-export const makeDBListGallery = (): ListGalleryDomainUseCase => {
-  const galleryMongoRepository = new MongoRepository()
-  return new ListGalleryDataUseCase(galleryMongoRepository)
-}
-export const makeDBSaveGallery = (): SaveGalleryDomainUseCase => {
-  const galleryMongoRepository = new MongoRepository()
-  return new SaveGalleryDataUseCase(galleryMongoRepository)
-}
+export const makeDBGallery = (): GalleryDomainUseCase => {
+  const galleryMongoRepository = new MongoGalleryRepository();
+  return new GalleryDataUseCase(galleryMongoRepository);
+};
+
+export const makeDBNFT = (): NFTDomainUseCase => {
+  const nftMongoRepository = new MongoNFTRepository();
+  return new NFTDataUseCase(nftMongoRepository);
+};

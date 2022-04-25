@@ -1,2 +1,2 @@
-export * from './ListGalleryDomainUseCase'
-export * from './SaveGalleryDomainUseCase'
+export * from './GalleryDomainUseCase';
+export * from './NFTDomainUseCase';
