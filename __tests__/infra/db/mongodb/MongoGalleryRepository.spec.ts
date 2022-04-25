@@ -39,10 +39,12 @@ describe('MongoRepository', () => {
     await mockGallery();
 
     const aux = makeAux();
-    const result = await aux.findOne(galleryId);
+    if (galleryId) {
+      const result = await aux.findOne(galleryId);
 
-    expect(result).not.toBeNull();
-    expect(result?._id).toEqual(galleryId);
+      expect(result).not.toBeNull();
+      expect(result?._id).toEqual(galleryId);
+    }
   });
 
   it('should find all galleries', async () => {
