@@ -1,29 +1,21 @@
 import faker from '@faker-js/faker';
-import { GalleryModel, GalleryNFTModel } from '../../../src/domain/models';
+import { GalleryModel } from '../../../src/domain/models';
 import { GalleryDomainUseCase } from '../../../src/domain/usecases';
-export const mockFindGallery = (): GalleryModel => {
+export const mockFindGallery = (id: string): GalleryModel => {
   return {
-    id: faker.datatype.uuid(),
+    id: id,
     name: faker.random.word(),
     nftId: faker.datatype.uuid(),
     ownerId: faker.datatype.uuid(),
   };
 };
-export const mockFindGalleries = (): GalleryModel[] => [mockFindGallery(), mockFindGallery()];
+export const mockFindGalleries = (): GalleryModel[] => [
+  mockFindGallery(faker.datatype.uuid()),
+  mockFindGallery(faker.datatype.uuid()),
+];
 
-export const mockFindOneNFT = (): GalleryNFTModel => {
-  return {
-    id: faker.datatype.uuid(),
-    galleryId: faker.datatype.uuid(),
-    nft: {},
-  };
-};
-export const mockFindAllNFTs = (): GalleryNFTModel[] => [mockFindOneNFT(), mockFindOneNFT()];
-
-export const mockAddGallery = (): GalleryDomainUseCase.Params => ({
+export const mockAddGallery = (): GalleryDomainUseCase.AddParams => ({
   name: faker.random.word(),
   nftId: faker.datatype.uuid(),
   ownerId: faker.datatype.uuid(),
 });
-
-export const mockAddNFT = (): Save

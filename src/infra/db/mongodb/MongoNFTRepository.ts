@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
 import { NFTRepository } from '../../../data/protocols/db/gallery';
-import { GalleryDomainUseCase, NFTDomainUseCase } from '../../../domain/usecases';
+import { NFTDomainUseCase } from '../../../domain/usecases';
 import { MongoHelper } from './MongoHelper';
 
 export class MongoNFTRepository implements NFTRepository {
@@ -8,7 +8,7 @@ export class MongoNFTRepository implements NFTRepository {
     const collection = MongoHelper.getCollection('nft');
     const data = await collection.findOne<NFTDomainUseCase.Result>({ _id: new ObjectId(nftId), galleryId: id });
     if (data) {
-      data.id = nftId;
+      data._id = nftId;
     }
     return data;
   }
@@ -23,7 +23,7 @@ export class MongoNFTRepository implements NFTRepository {
 
     if (result.insertedId) {
       return {
-        id: result.insertedId.toHexString(),
+        _id: result.insertedId.toHexString(),
         ...nft,
       };
     }

@@ -12,5 +12,11 @@ export namespace GalleryDomainUseCase {
     nftId: string;
     ownerId: string;
   };
+
+  export type AddParams = {
+    name: string;
+    nftId: string;
+    ownerId: string;
+  };
   export type Result = GalleryModel;
 }

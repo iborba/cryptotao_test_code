@@ -11,7 +11,7 @@
     "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down",
     "test": "jest --clearCache && jest -c jest-unit-config.js",
-    "test:watch": "jest --clearCache && jest __tests__/.*/MongoRepository.spec.ts --watch --detectOpenHandles --maxWorkers=1 -c jest-unit-config.js"
+    "test:watch": "jest --clearCache && jest __tests__/.*/*.spec.ts --watch --detectOpenHandles --maxWorkers=1 -c jest-unit-config.js"
   },
   "husky": {
     "hooks": {

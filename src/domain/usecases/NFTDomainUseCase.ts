@@ -1,3 +1,5 @@
+import { NFTModel } from '../models';
+
 export interface NFTDomainUseCase {
   findOne: (galleryId: string, nftId: string) => Promise<NFTDomainUseCase.Result | null>;
   findAll: (galleryId: string) => Promise<NFTDomainUseCase.Result[]>;
@@ -10,8 +12,9 @@ export namespace NFTDomainUseCase {
     galleryId: string;
     nft: object;
   };
-  export type Result = {
-    id: string;
+  export type AddParams = {
+    galleryId: string;
     nft: object;
   };
+  export type Result = NFTModel;
 }

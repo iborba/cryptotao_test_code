@@ -1,7 +1,6 @@
-import faker from '@faker-js/faker';
-import { GalleryModel } from '../../../src/domain/models';
 import { GalleryDomainUseCase } from '../../../src/domain/usecases';
-import { mockFindAllNFTs, mockFindGalleries, mockFindGallery, mockFindOneNFT } from '../../domain/mocks/MockGallery';
+import { badRequest } from '../../../src/presentation/helpers/HttpHelper';
+import { mockFindGalleries, mockFindGallery } from '../../domain/mocks/MockGallery';
 
 export class GallerySpy implements GalleryDomainUseCase {
   params: GalleryDomainUseCase.Params | undefined;
@@ -9,13 +8,24 @@ export class GallerySpy implements GalleryDomainUseCase {
     return mockFindGalleries();
   }
   async findOne(id: string): Promise<GalleryDomainUseCase.Result> {
-    return mockFindGallery();
+    return mockFindGallery(id);
   }
-  async create(gallery: GalleryDomainUseCase.Params): Promise<GalleryDomainUseCase.Result | null> {
+  async create(gallery: GalleryDomainUseCase.Params): Promise<GalleryDomainUseCase.Result | false> {
     this.params = gallery;
     return {
-      id: faker.datatype.uuid(),
       ...gallery,
     };
+  }
+}
+export class BadGallerySpy implements GalleryDomainUseCase {
+  params: GalleryDomainUseCase.Params | undefined;
+  async findAll(): Promise<GalleryDomainUseCase.Result[]> {
+    throw badRequest(new Error());
+  }
+  async findOne(id: string): Promise<GalleryDomainUseCase.Result> {
+    throw badRequest(new Error());
+  }
+  async create(gallery: GalleryDomainUseCase.Params): Promise<GalleryDomainUseCase.Result | false> {
+    throw badRequest(new Error());
   }
 }

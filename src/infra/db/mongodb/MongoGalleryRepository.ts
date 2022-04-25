@@ -21,8 +21,8 @@ export class MongoGalleryRepository implements GalleryRepository {
     const result = await galleryCollection.insertOne(gallery);
 
     if (result.insertedId) {
+      gallery.id = result.insertedId.toHexString();
       return {
-        id: result.insertedId.toHexString(),
         ...gallery,
       };
     }

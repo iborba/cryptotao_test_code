@@ -1,9 +1,10 @@
 import { SaveGalleryController } from '../../../src/presentation/controller';
 import { faker } from '@faker-js/faker';
 import { badRequest, noContent } from '../../../src/presentation/helpers/HttpHelper';
-import { SaveGallerySpy } from '../mocks/MockGallery';
+import { GallerySpy } from '../mocks';
 
 const mockRequest = (): SaveGalleryController.Request => ({
+  id: faker.datatype.uuid(),
   name: faker.random.word(),
   nftId: faker.datatype.uuid(),
   ownerId: faker.datatype.uuid(),
@@ -11,15 +12,15 @@ const mockRequest = (): SaveGalleryController.Request => ({
 
 type AuxTypes = {
   aux: SaveGalleryController;
-  saveGallerySpy: SaveGallerySpy;
+  gallerySpy: GallerySpy;
 };
 
 const makeGalleryAux = (): AuxTypes => {
-  const saveGallerySpy = new SaveGallerySpy();
-  const aux = new SaveGalleryController(saveGallerySpy);
+  const gallerySpy = new GallerySpy();
+  const aux = new SaveGalleryController(gallerySpy);
   return {
     aux,
-    saveGallerySpy,
+    gallerySpy,
   };
 };
 

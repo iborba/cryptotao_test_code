@@ -1,26 +1,29 @@
 import { Collection } from 'mongodb';
-import { MongoHelper, MongoGalleryRepository } from '../../../../src/infra/db/mongodb';
-import { mockAddGallery } from '../../../domain/mocks/MockGallery';
+import { MongoHelper, MongoNFTRepository } from '../../../../src/infra/db/mongodb';
+import { mockAddNFT } from '../../../domain/mocks';
 import env from '../../../../src/main/config/env';
-import { GalleryDomainUseCase } from '../../../../src/domain/usecases';
+import { NFTModel } from '../../../../src/domain/models';
 
-let galleryCollection: Collection;
 let nftCollection: Collection;
+let galleryId: string;
+let nftId: string;
 
-const mockGallery = async (): Promise<GalleryDomainUseCase.Result | false> => {
-  const gallery = mockAddGallery();
-  const res = await galleryCollection.insertOne(gallery);
+const mockNFT = async (): Promise<void> => {
+  const nft = mockAddNFT();
+  const res = await nftCollection.insertOne(nft);
 
-  if (res.insertedId) return { id: res.insertedId.toHexString(), ...gallery };
-  else return false;
+  nftId = res.insertedId.toHexString();
+  const result = await nftCollection.findOne<NFTModel>({ _id: res.insertedId });
+  if (result) galleryId = result.galleryId;
 };
 
-const mockNFT = async (): Promise<void> {
-  const nft = mockAddNFT()
-}
+const mockNFTs = async (): Promise<void> => {
+  const nfts = [mockNFT()];
+  await nftCollection.insertMany(nfts);
+};
 
-const makeAux = (): MongoGalleryRepository => {
-  return new MongoGalleryRepository();
+const makeAux = (): MongoNFTRepository => {
+  return new MongoNFTRepository();
 };
 
 describe('MongoRepository', () => {
@@ -33,21 +36,25 @@ describe('MongoRepository', () => {
   });
 
   beforeEach(async () => {
-    galleryCollection = MongoHelper.getCollection('galleries');
-    await galleryCollection.deleteMany({});
-
     nftCollection = MongoHelper.getCollection('nft');
     await nftCollection.deleteMany({});
   });
 
-  it('should find all NFTs', async () => {
-    const gallery = await mockGallery();
+  it('should find one NFT', async () => {
+    await mockNFT();
 
-    if (gallery) {
-      const aux = makeAux();
-      const result = await aux.findAllNFTs(gallery.id);
-      console.log('allnft', result);
-      expect(result).not.toBeUndefined();
-    }
+    const aux = makeAux();
+    const result = await aux.findOne(galleryId, nftId);
+    expect(result).not.toBeNull();
+    expect(result?._id).toEqual(nftId);
+    expect(result?.galleryId).toEqual(galleryId);
+  });
+
+  it('should find all NFTs', async () => {
+    await mockNFTs();
+    const aux = makeAux();
+    const result = await aux.findAll(galleryId);
+    expect(result).not.toBeUndefined();
+    expect(result).toHaveLength(2);
   });
 });

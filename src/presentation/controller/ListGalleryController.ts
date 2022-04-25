@@ -7,7 +7,8 @@ export class ListGalleryController implements Controller {
   async handle(request: GalleryDomainUseCase.Params): Promise<HttpResponse> {
     try {
       const { id } = request;
-      return ok(this.domain.findOne(id));
+      const result = await this.domain.findOne(id);
+      return ok(result);
     } catch (error) {
       return badRequest(new Error('error listing gallery'));
     }
