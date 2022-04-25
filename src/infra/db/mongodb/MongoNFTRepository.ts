@@ -6,7 +6,7 @@ import { MongoHelper } from './MongoHelper';
 export class MongoNFTRepository implements NFTRepository {
   async findOne(id?: ObjectId, nftId?: ObjectId): Promise<NFTDomainUseCase.Result | null> {
     const collection = MongoHelper.getCollection('nft');
-    const data = await collection.findOne<NFTDomainUseCase.Result>({ _id: nftId, galleryId: id });
+    const data = await collection.findOne<NFTDomainUseCase.Result>({ _id: new ObjectId(nftId), galleryId: id });
     if (data) {
       data._id = nftId;
     }
@@ -31,10 +31,10 @@ export class MongoNFTRepository implements NFTRepository {
   }
   async delete(galleryId?: ObjectId, nftId?: ObjectId): Promise<void> {
     const collection = MongoHelper.getCollection('nft');
-    await collection.deleteOne({ _id: nftId });
+    await collection.deleteOne({ _id: new ObjectId(nftId) });
   }
   async update(galleryId: ObjectId, nftId: ObjectId, nft: NFTDomainUseCase.Params): Promise<void> {
     const collection = MongoHelper.getCollection('nft');
-    await collection.updateOne({ _id: nftId, galleryId }, nft);
+    await collection.updateOne({ _id: new ObjectId(nftId), galleryId }, nft);
   }
 }

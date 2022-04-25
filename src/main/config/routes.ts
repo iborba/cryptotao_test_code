@@ -24,8 +24,8 @@ export class Routes {
     this.routes.post('/nft', headerValidator, adaptRoute(makeSaveNFTController()));
 
     this.routes.get('/galleries', headerValidator, adaptRoute(makeListAllGalleriesController()));
-    this.routes.get('/gallery/:id', headerValidator, adaptRoute(makeListOneGalleryController()));
+    this.routes.get('/gallery/:_id', headerValidator, adaptRoute(makeListOneGalleryController()));
     this.routes.get('/nfts/:galleryId', headerValidator, adaptRoute(makeListAllNFTsController()));
-    this.routes.get('/nft/:galleryId/:id', headerValidator, adaptRoute(makeListOneNFTController()));
+    this.routes.get('/nft/:galleryId/:_id', headerValidator, adaptRoute(makeListOneNFTController()));
   }
 }

@@ -3,9 +3,9 @@ import { GalleryRepository } from '../../../data/protocols/db/gallery/GalleryRep
 import { GalleryDomainUseCase } from '../../../domain/usecases';
 import { MongoHelper } from './MongoHelper';
 export class MongoGalleryRepository implements GalleryRepository {
-  async findOne(id?: ObjectId): Promise<GalleryDomainUseCase.Result | null> {
+  async findOne(id: ObjectId): Promise<GalleryDomainUseCase.Result | null> {
     const collection = MongoHelper.getCollection('galleries');
-    const data = await collection.findOne<GalleryDomainUseCase.Result>({ _id: id });
+    const data = await collection.findOne<GalleryDomainUseCase.Result>({ _id: new ObjectId(id) });
     if (data) {
       data._id = id;
     }
@@ -30,10 +30,10 @@ export class MongoGalleryRepository implements GalleryRepository {
   }
   async delete(id?: ObjectId): Promise<void> {
     const collection = MongoHelper.getCollection('galleries');
-    await collection.deleteOne({ _id: id });
+    await collection.deleteOne({ _id: new ObjectId(id) });
   }
   async update(id: ObjectId, gallery: GalleryDomainUseCase.Params): Promise<void> {
     const collection = MongoHelper.getCollection('galleries');
-    await collection.updateOne({ _id: id }, gallery);
+    await collection.updateOne({ _id: new ObjectId(id) }, gallery);
   }
 }

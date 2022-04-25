@@ -2,5 +2,6 @@
   "singleQuote": true,
   "[typescript]": {
     "editor.formatOnSave": true,
-  }
+  },
+  "npm.fetchOnlinePackageInfo": true
 }

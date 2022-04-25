@@ -1,11 +1,9 @@
-import { MongoHelper } from './infra/db/mongodb/MongoHelper';
-import { App } from './main/config/app';
+// import 'module-alias/register';
 import env from './main/config/env';
-const app = new App();
+import { MongoHelper } from './infra/db/mongodb/MongoHelper';
 
-app.start();
 MongoHelper.connect(env.mongoUrl).then(async () => {
-  app._express.listen(env.port, () => {
-    console.log(`🚀 Server listening at ${env.port}`);
-  });
+  const { setupApp } = await import('./main/config/app');
+  const app = await setupApp();
+  app.listen(env.port, () => console.log(`🚀 Server listening at ${env.port}`));
 });
