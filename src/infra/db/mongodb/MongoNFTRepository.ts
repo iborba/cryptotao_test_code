@@ -12,9 +12,9 @@ export class MongoNFTRepository implements NFTRepository {
     }
     return data;
   }
-  async findAll(id: string): Promise<NFTDomainUseCase.Result[]> {
+  async findAll(galleryId: string): Promise<NFTDomainUseCase.Result[]> {
     const collection = MongoHelper.getCollection('nft');
-    return await collection.find<NFTDomainUseCase.Result>({}).toArray();
+    return await collection.find<NFTDomainUseCase.Result>({ galleryId }).toArray();
   }
 
   async create(nft: NFTDomainUseCase.Params): Promise<NFTDomainUseCase.Result | false> {

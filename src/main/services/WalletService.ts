@@ -1,16 +1,13 @@
-import { Request, Response } from 'express';
-import { StatusCodes } from 'http-status-codes';
-
+import { resolveToWalletAddress, getParsedNftAccountsByOwner } from '@nfteyez/sol-rayz';
 export class WalletService {
-  async getWallet(_: Request, res: Response) {
-    return res.status(StatusCodes.OK).json('YOUR WALLET');
-  }
+  async getNFTsFromWallet(address: string) {
+    let publicAddress = '';
+    try {
+      publicAddress = await resolveToWalletAddress({ text: address });
+    } catch (error) {
+      return [];
+    }
 
-  async createWallet(_: Request, res: Response) {
-    return res.status(StatusCodes.CREATED).json('WALLET CREATED');
-  }
-
-  async addToWallet(_: Request, res: Response) {
-    return res.status(StatusCodes.CREATED).json('OBJECT ADDED TO WALLET');
+    return await getParsedNftAccountsByOwner({ publicAddress });
   }
 }

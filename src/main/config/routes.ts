@@ -7,25 +7,25 @@ import {
   makeListOneGalleryController,
   makeListOneNFTController,
   makeSaveGalleryController,
+  makeSaveNFTController,
+  makeWalletController,
 } from '../factory/controller';
 import { headerValidator } from '../middleware/validators/headers';
-import { WalletService } from '../services/WalletService';
 
 export class Routes {
   routes: Router;
 
   constructor() {
     this.routes = Router();
-    const walletService = new WalletService();
-
     this.routes.get('/', (_, res) => res.status(StatusCodes.OK).send('Hello World!'));
-    this.routes.get('/wallet', headerValidator, walletService.getWallet);
-    this.routes.post('/wallet', headerValidator, walletService.createWallet);
-    this.routes.post('/gallery', headerValidator, adaptRoute(makeSaveGalleryController()));
+    this.routes.get('/wallet/:address', headerValidator, adaptRoute(makeWalletController()));
 
-    this.routes.get('/gallery', headerValidator, adaptRoute(makeListOneGalleryController()));
+    this.routes.post('/gallery', headerValidator, adaptRoute(makeSaveGalleryController()));
+    this.routes.post('/nft', headerValidator, adaptRoute(makeSaveNFTController()));
+
     this.routes.get('/galleries', headerValidator, adaptRoute(makeListAllGalleriesController()));
-    this.routes.get('/nft', headerValidator, adaptRoute(makeListOneNFTController()));
-    this.routes.get('/nfts', headerValidator, adaptRoute(makeListAllNFTsController()));
+    this.routes.get('/gallery/:id', headerValidator, adaptRoute(makeListOneGalleryController()));
+    this.routes.get('/nfts/:galleryId', headerValidator, adaptRoute(makeListAllNFTsController()));
+    this.routes.get('/nft/:galleryId/:id', headerValidator, adaptRoute(makeListOneNFTController()));
   }
 }

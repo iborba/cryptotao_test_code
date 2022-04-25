@@ -3,3 +3,4 @@ export * from './ListAllNFTsController';
 export * from './ListGalleryController';
 export * from './ListNFTController';
 export * from './SaveGalleryController';
+export * from './WalletController';
