@@ -7,3 +7,7 @@ Then, in your preferred client, try this request: curl --request GET --url http:
 
 There is one file called *insomnia-collection.json* on which you can run all endpoints made.
 
+In order to run the solution in docker, please run:
+`$ npm run build`
+`$ docker build . -t api-cryptotao-test-code`
+`$ npm run docker:up`

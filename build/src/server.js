@@ -38,6 +38,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // import 'module-alias/register';
 const env_1 = __importDefault(require("./main/config/env"));
 const MongoHelper_1 = require("./infra/db/mongodb/MongoHelper");
+console.log('server');
 MongoHelper_1.MongoHelper.connect(env_1.default.mongoUrl)
     .then(() => __awaiter(void 0, void 0, void 0, function* () {
     const { setupApp } = yield Promise.resolve().then(() => __importStar(require('./main/config/app')));

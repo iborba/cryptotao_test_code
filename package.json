@@ -4,11 +4,11 @@
   "description": "An application code for CryptoTao made by iborba",
   "main": "app.js",
   "scripts": {
-    "build": "tsc",
-    "start": "node build/server.js",
+    "build": "tsc -p .",
+    "start": "node server.js",
     "start:dev": "nodemon",
     "prepare": "husky install",
-    "docker:up": "npm run build && docker-compose down && docker-compose up -d",
+    "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down",
     "test": "jest --clearCache && jest -c jest-unit-config.js",
     "test:watch": "jest --clearCache && jest __tests__/.*/*.spec.ts --watch --detectOpenHandles --maxWorkers=1 -c jest-unit-config.js"
