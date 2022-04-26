@@ -1,8 +1,9 @@
 node_modules
-dist
+build
 coverage
 data
 !src/data
 !tests/data
 .vscode
+.env
 globalConfig.json
