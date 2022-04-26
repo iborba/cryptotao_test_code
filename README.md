@@ -4,3 +4,6 @@ This project is a code-challenge for CryptoTao Full-stack position, originally m
 
 * To run your project locally, you can run `$ npm run start:dev `
 Then, in your preferred client, try this request: curl --request GET --url http://localhost:3000/api and you'll receive a Hello World message
+
+There is one file called *insomnia-collection.json* on which you can run all endpoints made.
+

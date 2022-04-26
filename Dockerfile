@@ -1,10 +1,9 @@
-FROM node:14.15.5-alpine3.10 as dev
+FROM node:14.19-alpine3.14 as dev
 
 ADD ./ /src
 WORKDIR /src
 RUN npm install --production
 RUN mv node_modules prod_node_modules
-RUN npm install
 RUN npm run build
 
 FROM node:14.15.5-alpine3.10

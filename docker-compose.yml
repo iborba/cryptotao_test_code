@@ -1,21 +1,21 @@
 version: "3"
 services:
   mongo:
-    container_name: mongo-container
+    container_name: mongo-cryptotao-test-code
     image: mongo:3
     restart: always
     volumes:
       - ./data:/data/db
     ports:
       - "27017:27017"
-  api:
-    container_name: cryptotao-test-code
+  cryptotao:
+    container_name: api-cryptotao-test-code
     image: node:14
     restart: always
     environment:
       - PORT=3000
-      - MONGO_URL=mongodb://mongo:27017/cryptotao-test-code
+      - MONGO_URL=mongodb://localhost:27017/mongo-cryptotao-test-code
     ports:
       - "3000:3000"
-    links:
+    external_links:
       - mongo
