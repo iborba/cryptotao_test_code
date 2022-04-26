@@ -1,7 +1,7 @@
 // import 'module-alias/register';
 import env from './main/config/env';
 import { MongoHelper } from './infra/db/mongodb/MongoHelper';
-console.log('server');
+
 MongoHelper.connect(env.mongoUrl)
   .then(async () => {
     const { setupApp } = await import('./main/config/app');
